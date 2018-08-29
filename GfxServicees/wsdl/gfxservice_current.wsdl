@@ -1,0 +1,429 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions name="GfxService" targetNamespace="urn:si.tjenester.GfxServices" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="urn:si.tjenester.GfxServices" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="urn:si.tjenester.GfxServices" xmlns:tns="urn:si.tjenester.GfxServices" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element name="checkAndInvertTiff" type="tns:checkAndInvertTiff" />
+<xs:element name="checkAndInvertTiffResponse" type="tns:checkAndInvertTiffResponse" />
+<xs:element name="checkAndRecompressJBIG2" type="tns:checkAndRecompressJBIG2" />
+<xs:element name="checkAndRecompressJBIG2Response" type="tns:checkAndRecompressJBIG2Response" />
+<xs:element name="convertGfxToPdf" type="tns:convertGfxToPdf" />
+<xs:element name="convertGfxToPdfResponse" type="tns:convertGfxToPdfResponse" />
+<xs:element name="convertXmlGfxToPdf" type="tns:convertXmlGfxToPdf" />
+<xs:element name="convertXmlGfxToPdfResponse" type="tns:convertXmlGfxToPdfResponse" />
+<xs:element name="makePdf" type="tns:makePdf" />
+<xs:element name="makePdfA" type="tns:makePdfA" />
+<xs:element name="makePdfAResponse" type="tns:makePdfAResponse" />
+<xs:element name="makePdfResponse" type="tns:makePdfResponse" />
+<xs:element name="makePreview" type="tns:makePreview" />
+<xs:element name="makePreviewResponse" type="tns:makePreviewResponse" />
+<xs:element name="splitMTifftoJpeg" type="tns:splitMTifftoJpeg" />
+<xs:element name="splitMTifftoJpegResponse" type="tns:splitMTifftoJpegResponse" />
+<xs:element name="validateImage" type="tns:validateImage" />
+<xs:element name="validateImageResponse" type="tns:validateImageResponse" />
+<xs:element name="validateImageSC" type="tns:validateImageSC" />
+<xs:element name="validateImageSCResponse" type="tns:validateImageSCResponse" />
+<xs:complexType name="convertXmlGfxToPdf">
+<xs:sequence>
+<xs:element minOccurs="0" name="xml" type="xs:string" />
+<xs:element minOccurs="0" name="xslt" type="xs:string" />
+<xs:element maxOccurs="unbounded" minOccurs="0" name="images" type="tns:imagebean" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="imagebean">
+<xs:sequence />
+<xs:attribute name="name" type="xs:string" use="required" />
+<xs:attribute name="mimetype" type="xs:string" use="required" />
+<xs:attribute name="imagedata" type="xs:base64Binary" use="required" />
+<xs:attribute name="pages">
+<xs:simpleType>
+<xs:list itemType="xs:string" />
+</xs:simpleType>
+</xs:attribute>
+</xs:complexType>
+<xs:complexType abstract="true" name="abstractCollection">
+<xs:sequence />
+</xs:complexType>
+<xs:complexType abstract="true" name="abstractList">
+<xs:complexContent>
+<xs:extension base="tns:abstractCollection">
+<xs:sequence />
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="arrayList">
+<xs:complexContent>
+<xs:extension base="tns:abstractList">
+<xs:sequence />
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="convertXmlGfxToPdfResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:base64Binary" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="makePdf">
+<xs:sequence>
+<xs:element minOccurs="0" name="xmldoc" type="xs:string" />
+<xs:element minOccurs="0" name="xsltID" type="xs:string" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="makePdfResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="makePreview">
+<xs:sequence>
+<xs:element minOccurs="0" name="document" type="tns:imagebean" />
+<xs:element name="scalewidth" type="xs:int" />
+<xs:element minOccurs="0" name="mimetype" type="xs:string" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="makePreviewResponse">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:imagebean" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="checkAndInvertTiff">
+<xs:sequence>
+<xs:element minOccurs="0" name="tiffimage" type="tns:imagebean" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="checkAndInvertTiffResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:imagebean" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="validateImage">
+<xs:sequence>
+<xs:element minOccurs="0" name="image" type="tns:imagebean" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="validateImageResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:boolean" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="checkAndRecompressJBIG2">
+<xs:sequence>
+<xs:element minOccurs="0" name="tocheck" type="tns:imagebean" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="checkAndRecompressJBIG2Response">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:imagebean" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="splitMTifftoJpeg">
+<xs:sequence>
+<xs:element minOccurs="0" name="image" type="tns:imagebean" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="splitMTifftoJpegResponse">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:imagebean" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="convertGfxToPdf">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="images" type="tns:imagebean" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="convertGfxToPdfResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:base64Binary" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="makePdfA">
+<xs:sequence>
+<xs:element minOccurs="0" name="xmldoc" type="xs:string" />
+<xs:element minOccurs="0" name="xsltID" type="xs:string" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="makePdfAResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="validateImageSC">
+<xs:sequence>
+<xs:element minOccurs="0" name="image" type="tns:imagebean" />
+<xs:element minOccurs="0" name="imgid" type="xs:string" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="validateImageSCResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:validatebean" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="validatebean">
+<xs:sequence />
+<xs:attribute name="validate" type="xs:boolean" use="required" />
+<xs:attribute name="imgid" type="xs:string" use="required" />
+</xs:complexType>
+<xs:element name="SOAPFaultException" type="tns:SOAPFaultException" />
+<xs:complexType name="SOAPFaultException">
+<xs:sequence />
+</xs:complexType>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="convertGfxToPdfResponse">
+    <wsdl:part element="tns:convertGfxToPdfResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="convertGfxToPdf">
+    <wsdl:part element="tns:convertGfxToPdf" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="checkAndInvertTiff">
+    <wsdl:part element="tns:checkAndInvertTiff" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SOAPFaultException">
+    <wsdl:part element="tns:SOAPFaultException" name="SOAPFaultException">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="checkAndRecompressJBIG2">
+    <wsdl:part element="tns:checkAndRecompressJBIG2" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="makePreview">
+    <wsdl:part element="tns:makePreview" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="checkAndRecompressJBIG2Response">
+    <wsdl:part element="tns:checkAndRecompressJBIG2Response" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="validateImageSC">
+    <wsdl:part element="tns:validateImageSC" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="makePdfAResponse">
+    <wsdl:part element="tns:makePdfAResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="convertXmlGfxToPdf">
+    <wsdl:part element="tns:convertXmlGfxToPdf" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="convertXmlGfxToPdfResponse">
+    <wsdl:part element="tns:convertXmlGfxToPdfResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="validateImage">
+    <wsdl:part element="tns:validateImage" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="splitMTifftoJpegResponse">
+    <wsdl:part element="tns:splitMTifftoJpegResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="splitMTifftoJpeg">
+    <wsdl:part element="tns:splitMTifftoJpeg" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="makePdf">
+    <wsdl:part element="tns:makePdf" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="makePdfA">
+    <wsdl:part element="tns:makePdfA" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="makePdfResponse">
+    <wsdl:part element="tns:makePdfResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="makePreviewResponse">
+    <wsdl:part element="tns:makePreviewResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="checkAndInvertTiffResponse">
+    <wsdl:part element="tns:checkAndInvertTiffResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="validateImageResponse">
+    <wsdl:part element="tns:validateImageResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="validateImageSCResponse">
+    <wsdl:part element="tns:validateImageSCResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="GfxService">
+    <wsdl:operation name="convertXmlGfxToPdf">
+      <wsdl:input message="tns:convertXmlGfxToPdf" name="convertXmlGfxToPdf">
+    </wsdl:input>
+      <wsdl:output message="tns:convertXmlGfxToPdfResponse" name="convertXmlGfxToPdfResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="makePdf">
+      <wsdl:input message="tns:makePdf" name="makePdf">
+    </wsdl:input>
+      <wsdl:output message="tns:makePdfResponse" name="makePdfResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="makePreview">
+      <wsdl:input message="tns:makePreview" name="makePreview">
+    </wsdl:input>
+      <wsdl:output message="tns:makePreviewResponse" name="makePreviewResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkAndInvertTiff">
+      <wsdl:input message="tns:checkAndInvertTiff" name="checkAndInvertTiff">
+    </wsdl:input>
+      <wsdl:output message="tns:checkAndInvertTiffResponse" name="checkAndInvertTiffResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="validateImage">
+      <wsdl:input message="tns:validateImage" name="validateImage">
+    </wsdl:input>
+      <wsdl:output message="tns:validateImageResponse" name="validateImageResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:SOAPFaultException" name="SOAPFaultException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="checkAndRecompressJBIG2">
+      <wsdl:input message="tns:checkAndRecompressJBIG2" name="checkAndRecompressJBIG2">
+    </wsdl:input>
+      <wsdl:output message="tns:checkAndRecompressJBIG2Response" name="checkAndRecompressJBIG2Response">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="splitMTifftoJpeg">
+      <wsdl:input message="tns:splitMTifftoJpeg" name="splitMTifftoJpeg">
+    </wsdl:input>
+      <wsdl:output message="tns:splitMTifftoJpegResponse" name="splitMTifftoJpegResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="convertGfxToPdf">
+      <wsdl:input message="tns:convertGfxToPdf" name="convertGfxToPdf">
+    </wsdl:input>
+      <wsdl:output message="tns:convertGfxToPdfResponse" name="convertGfxToPdfResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:SOAPFaultException" name="SOAPFaultException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="makePdfA">
+      <wsdl:input message="tns:makePdfA" name="makePdfA">
+    </wsdl:input>
+      <wsdl:output message="tns:makePdfAResponse" name="makePdfAResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="validateImageSC">
+      <wsdl:input message="tns:validateImageSC" name="validateImageSC">
+    </wsdl:input>
+      <wsdl:output message="tns:validateImageSCResponse" name="validateImageSCResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:SOAPFaultException" name="SOAPFaultException">
+    </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="GfxServiceSoapBinding" type="tns:GfxService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="convertXmlGfxToPdf">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="convertXmlGfxToPdf">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="convertXmlGfxToPdfResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="makePdf">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="makePdf">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="makePdfResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="makePreview">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="makePreview">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="makePreviewResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkAndInvertTiff">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="checkAndInvertTiff">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="checkAndInvertTiffResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkAndRecompressJBIG2">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="checkAndRecompressJBIG2">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="checkAndRecompressJBIG2Response">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="validateImage">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="validateImage">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="validateImageResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="SOAPFaultException">
+        <soap:fault name="SOAPFaultException" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="splitMTifftoJpeg">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="splitMTifftoJpeg">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="splitMTifftoJpegResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="convertGfxToPdf">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="convertGfxToPdf">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="convertGfxToPdfResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="SOAPFaultException">
+        <soap:fault name="SOAPFaultException" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="makePdfA">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="makePdfA">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="makePdfAResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="validateImageSC">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="validateImageSC">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="validateImageSCResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="SOAPFaultException">
+        <soap:fault name="SOAPFaultException" use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="GfxService">
+    <wsdl:port binding="tns:GfxServiceSoapBinding" name="GfxServicePort">
+      <soap:address location="http://jmj-desktop:8080/GfxServicees/GfxService/GfxService" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
